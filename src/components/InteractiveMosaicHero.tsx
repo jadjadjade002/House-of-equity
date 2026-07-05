@@ -132,11 +132,11 @@ export default function InteractiveMosaicHero() {
   }, [isMounted]);
 
   if (!isMounted) {
-    return <div className="h-[350vh] relative bg-white"><div className="sticky top-0 h-screen w-full bg-brand-beige" /></div>;
+    return <div className="h-[600vh] relative bg-white"><div className="sticky top-0 h-screen w-full bg-brand-beige" /></div>;
   }
 
   return (
-    <div ref={containerRef} className="h-[350vh] relative bg-white z-0">
+    <div ref={containerRef} className="h-[600vh] relative bg-white z-0">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-brand-beige">
 
         {/* Central Logo / Text */}
