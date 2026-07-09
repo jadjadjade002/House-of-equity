@@ -54,9 +54,8 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-lg mb-6 tracking-wide">Get Involved</h4>
           <ul className="flex flex-col gap-4 text-white/70 font-light">
-            <li><Link href="/volunteer" className="hover:text-brand-emerald hover:translate-x-1 inline-block transition-all">Volunteer</Link></li>
             <li><Link href="/donate" className="hover:text-brand-emerald hover:translate-x-1 inline-block transition-all">Donate</Link></li>
-            <li><Link href="/partners" className="hover:text-brand-emerald hover:translate-x-1 inline-block transition-all">Partner with Us</Link></li>
+            <li><Link href="/careers" className="hover:text-brand-emerald hover:translate-x-1 inline-block transition-all">Careers</Link></li>
             <li><Link href="/careers" className="hover:text-brand-emerald hover:translate-x-1 inline-block transition-all">Careers</Link></li>
           </ul>
         </div>
@@ -76,8 +75,8 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50 font-light">
           <p>© {new Date().getFullYear()} House of Equity (HEq). All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <span className="hover:text-white transition-colors cursor-default">Privacy Policy</span>
+            <span className="hover:text-white transition-colors cursor-default">Terms of Service</span>
           </div>
         </div>
       </div>

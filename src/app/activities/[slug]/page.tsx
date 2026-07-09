@@ -4,6 +4,10 @@ import Link from "next/link";
 import { mockActivities } from "@/lib/mockData";
 import { notFound } from "next/navigation";
 
+export async function generateStaticParams() {
+  return mockActivities.map((a) => ({ slug: a.slug }));
+}
+
 export default async function ActivityDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
