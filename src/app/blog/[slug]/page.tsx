@@ -3,29 +3,29 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
 
   // Mock data for the specific article
   const article = {
-    title: "Rethinking Gender Norms: Why Thailand's Youth Are Leading the Charge",
-    author: "Ploy M.",
-    role: "Gender Team Lead",
-    date: "July 4, 2026",
-    readTime: "6 min read",
+    title: "การทบทวนบรรทัดฐานทางเพศ: ทำไมเยาวชนไทยถึงเป็นผู้นำการเปลี่ยนแปลงในสังคมปัจจุบัน",
+    author: "พลอย ม.",
+    role: "หัวหน้าทีมสื่อสารเพศสภาพ",
+    date: "4 กรกฎาคม 2569",
+    readTime: "อ่าน 6 นาที",
     category: "Gender",
     image: "/images/gender_art_exhibition_1783175227598.jpg",
     content: `
-      <p class="mb-8">The landscape of gender roles in Thailand is undergoing a seismic shift. While traditional expectations have long dictated the paths of young men and women, a new wave of youth-led activism is demanding a radical reimagining of these norms.</p>
-      <h3 class="text-3xl font-bold text-brand-green mt-12 mb-6">The Breaking Point</h3>
-      <p class="mb-8">In our recent field research, we spoke with over 500 high school and university students across Bangkok. The consensus was overwhelming: the rigid boxes of the past are no longer sufficient to contain the multifaceted identities of today's youth.</p>
-      <p class="mb-8">"It's not just about pronouns or clothing," notes one participant from our Sexpectation exhibition. "It's about the freedom to choose our careers, our partners, and our futures without the weight of societal judgment."</p>
+      <p class="mb-8">ภูมิทัศน์ของบทบาททางเพศในประเทศไทยกำลังเกิดการเปลี่ยนแปลงครั้งใหญ่ แม้ความคาดหวังแบบดั้งเดิมจะกำหนดเส้นทางของเยาวชนชายหญิงมาอย่างยาวนาน แต่คลื่นการเคลื่อนไหวใหม่ที่นำโดยเยาวชนกำลังเรียกร้องให้มีการคิดทบทวนบรรทัดฐานเหล่านี้ใหม่อย่างจริงจัง</p>
+      <h3 class="text-3xl font-bold text-brand-green mt-12 mb-6">จุดเปลี่ยนครั้งสำคัญ</h3>
+      <p class="mb-8">ในงานวิจัยภาคสนามล่าสุดของเรา เราได้พูดคุยกับนักเรียนมัธยมปลายและมหาวิทยาลัยกว่า 500 คนทั่วกรุงเทพฯ ข้อสรุปที่ได้ตรงกันอย่างเป็นเอกฉันท์คือ กรอบความคิดที่ตายตัวในอดีตไม่เพียงพอที่จะรองรับอัตลักษณ์ที่หลากหลายของเยาวชนในปัจจุบันอีกต่อไป</p>
+      <p class="mb-8">"มันไม่ใช่แค่เรื่องของคำสรรพนามหรือเสื้อผ้า" หนึ่งในผู้เข้าร่วมกิจกรรมจากนิทรรศการ Sexpectation กล่าว "แต่มันคือเสรีภาพในการเลือกอาชีพ คู่ชีวิต และอนาคตของเราเอง โดยไม่ต้องถูกกดทับด้วยการตัดสินจากกรอบของสังคม"</p>
       <blockquote class="border-l-4 border-brand-emerald pl-6 py-2 my-12 text-2xl font-light text-brand-green italic bg-brand-emerald/5">
-        "The rigid boxes of the past are no longer sufficient to contain the multifaceted identities of today's youth."
+        "กรอบความคิดที่ตายตัวในอดีตไม่เพียงพอที่จะรองรับอัตลักษณ์ที่หลากหลายของเยาวชนในปัจจุบันอีกต่อไป"
       </blockquote>
-      <h3 class="text-3xl font-bold text-brand-green mt-12 mb-6">Policy Over Platitudes</h3>
-      <p class="mb-8">What makes this current movement distinct is its focus on structural change. Rather than relying solely on awareness campaigns, youth organizations like HEq are drafting actionable policy proposals. These range from inclusive sex education curriculums in public schools to workplace discrimination protections.</p>
-      <p class="mb-8">As we look to the future, it is clear that the momentum is unstoppable. The question is no longer whether gender norms will change, but rather how quickly institutions will adapt to the reality that the youth have already established.</p>
+      <h3 class="text-3xl font-bold text-brand-green mt-12 mb-6">ขับเคลื่อนเชิงนโยบายมากกว่าคำพูดสวยหรู</h3>
+      <p class="mb-8">สิ่งที่ทำให้การเคลื่อนไหวในครั้งนี้แตกต่างออกไปคือการมุ่งเน้นไปที่การเปลี่ยนแปลงเชิงโครงสร้าง แทนที่จะพึ่งพาเพียงแค่แคมเปญสร้างความตระหนักรู้ องค์กรเยาวชนอย่าง HEq กำลังร่างข้อเสนอนโยบายที่นำไปปฏิบัติได้จริง ตั้งแต่หลักสูตรสุขศึกษาเรื่องเพศที่ครอบคลุมในโรงเรียนรัฐบาล ไปจนถึงการปกป้องสิทธิ์จากการเลือกปฏิบัติในสถานที่ทำงาน</p>
+      <p class="mb-8">เมื่อเรามองไปที่อนาคต เป็นที่ชัดเจนว่าการขับเคลื่อนนี้ไม่มีวันหยุดยั้ง คำถามไม่ได้อยู่ที่ว่าบรรทัดฐานทางเพศจะเปลี่ยนแปลงไปหรือไม่ แต่อยู่ที่ว่าสถาบันและองค์กรต่าง ๆ จะปรับตัวได้เร็วเพียงใดเพื่อรับมือกับความเป็นจริงที่เยาวชนได้สร้างขึ้นแล้วต่างหาก</p>
     `
   };
 
   return (
-    <main className="flex flex-col min-h-screen bg-brand-beige pt-20">
+    <main className="flex flex-col min-h-screen bg-transparent pt-20">
       
       {/* Article Header */}
       <header className="max-w-4xl mx-auto w-full px-6 pt-16 pb-12">

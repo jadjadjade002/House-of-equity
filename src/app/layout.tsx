@@ -27,7 +27,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <Header />
-        <div className="flex-1 flex flex-col w-full">
+        <div className="flex-1 flex flex-col w-full bg-gradient-to-b from-white/10 via-[#FDFBF7]/40 to-[#ECEAE4]/30">
           {children}
         </div>
         <Footer />

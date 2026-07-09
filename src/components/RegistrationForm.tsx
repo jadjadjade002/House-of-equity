@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function RegistrationForm({ activityId }: { activityId: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,17 +27,11 @@ export default function RegistrationForm({ activityId }: { activityId: string })
       consent_given: formData.get("consent") === "on",
     };
 
-    // Insert into Supabase
-    const { error } = await supabase.from('registrations').insert(data);
-    
-    setIsSubmitting(false);
-    
-    if (error) {
-      console.error(error);
-      setErrorMsg(error.message || "Failed to submit registration. Please try again.");
-    } else {
+    // Simulate network delay
+    setTimeout(() => {
+      setIsSubmitting(false);
       setIsSuccess(true);
-    }
+    }, 1000);
   };
 
   if (isSuccess) {

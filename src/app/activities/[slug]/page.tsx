@@ -1,29 +1,23 @@
 import { MapPin, Calendar, Clock, Users } from "lucide-react";
 import RegistrationForm from "@/components/RegistrationForm";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { mockActivities } from "@/lib/mockData";
 import { notFound } from "next/navigation";
-
-export const dynamic = 'force-dynamic';
 
 export default async function ActivityDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  // Fetch from Supabase based on slug
-  const { data: activity, error } = await supabase
-    .from('activities')
-    .select('*, registrations(count)')
-    .eq('slug', slug)
-    .single();
+  // Find from mock data based on slug
+  const activity = mockActivities.find(a => a.slug === slug);
 
-  if (error || !activity) {
+  if (!activity) {
     notFound();
   }
 
-  const registered = activity.registrations?.[0]?.count || 0;
+  const registered = activity.registrationsCount || 0;
   const remainingSeats = activity.capacity - registered;
   
-  // Agenda is stored as JSONB in Supabase
+  // Agenda
   const agenda = activity.agenda || [];
 
   return (

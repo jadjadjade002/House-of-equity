@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
+:root {
+  --font-sans: 'Inter', var(--font-kanit), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Inter', sans-serif; }
+
 @theme inline {
   --color-brand-emerald: #10B981;
   --color-brand-green: #064E3B;
   --color-brand-orange: #F97316;
   --color-brand-beige: #FDFBF7;
   --color-brand-gray: #F3F4F6;
-  
-  --font-sans: var(--font-kanit), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -16,7 +20,10 @@
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(180deg, #FDFBF7 0%, #F6F4F0 50%, #ECEAE4 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+

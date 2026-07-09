@@ -1,32 +1,21 @@
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { mockActivities } from "@/lib/mockData";
 
-export default async function FeaturedActivities() {
-  const { data: activities, error } = await supabase
-    .from('activities')
-    .select('*')
-    .eq('status', 'Upcoming')
-    .order('created_at', { ascending: false })
-    .limit(3);
-    
-  if (error) {
-    console.error("Error fetching featured activities:", error);
-  }
-
-  const displayActivities = activities || [];
+export default function FeaturedActivities() {
+  const displayActivities = mockActivities.filter(a => a.status === 'Upcoming').slice(0, 3);
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 py-24 bg-brand-beige">
+    <section className="w-full max-w-7xl mx-auto px-6 py-24 bg-transparent">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12">
         <div>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-4 tracking-tight">Featured Activities</h2>
           <p className="text-xl text-foreground font-light max-w-2xl">
-            Join our upcoming workshops, exhibitions, and community projects. Be a part of the movement for equality.
+            ร่วมกับเวิร์กชอป นิทรรศการ และโครงการชุมชนที่กำลังจะมาถึง มาเป็นส่วนหนึ่งของการเคลื่อนไหวเพื่อความเท่าเทียม
           </p>
         </div>
         <Link href="/activities" className="mt-6 md:mt-0 text-brand-emerald font-medium flex items-center gap-2 hover:gap-4 transition-all group text-lg">
-          View all activities <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          ดูกิจกรรมทั้งหมด <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
 
@@ -67,14 +56,14 @@ export default async function FeaturedActivities() {
               </p>
 
               <div className="w-full py-4 text-center rounded-full border-2 border-brand-emerald text-brand-green font-medium text-lg group-hover:bg-brand-emerald group-hover:text-white transition-all duration-300">
-                Register Now
+                ลงทะเบียนเลย
               </div>
             </div>
           </Link>
         ))}
         {displayActivities.length === 0 && (
           <div className="col-span-3 text-center py-12 text-foreground/50">
-            No upcoming activities found. Check back later!
+            ยังไม่มีกิจกรรมที่กำลังจะมาถึง โปรดกลับมาตรวจสอบในภายหลัง!
           </div>
         )}
       </div>

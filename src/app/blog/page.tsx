@@ -1,82 +1,115 @@
 import Link from "next/link";
 
 export default function BlogIndex() {
-  // CNN-style layout requires distinct article groups
   const leadStory = {
     slug: "rethinking-gender-norms",
-    title: "Rethinking Gender Norms: Why Thailand's Youth Are Leading the Charge",
-    summary: "As societal expectations shift, a new generation of Thai youth are dismantling traditional gender roles and demanding radical inclusivity in every sector of society. Our latest field research uncovers the driving forces behind this movement.",
-    author: "Ploy M.",
-    date: "July 4, 2026",
+    title: "การทบทวนบรรทัดฐานทางเพศ: ทำไมเยาวชนไทยถึงเป็นผู้นำการเปลี่ยนแปลงในสังคมปัจจุบัน",
+    summary: "เมื่อความคาดหวังของสังคมเปลี่ยนไป คนรุ่นใหม่ของไทยกำลังทลายบทบาทเพศดั้งเดิมและเรียกร้องความครอบคลุมอย่างสุดขีดในทุกภาคส่วน งานวิจัยภาคสนามล่าสุดของเราเผยให้เห็นแรงขับเคลื่อนเบื้องหลังการเคลื่อนไหวนี้",
+    author: "พลอย ม.",
+    date: "4 กรกฎาคม 2569",
     category: "Gender",
     image: "/images/gender_art_exhibition_1783175227598.jpg"
   };
 
   const topStories = [
-    { slug: "policy-hackathons", title: "How Hackathons Are Becoming The New Protest", date: "July 2, 2026" },
-    { slug: "trash-hunter", title: "Inside the 'Trash Hunter' Movement Cleaning Up Lumphini", date: "June 28, 2026" },
-    { slug: "education-inequity", title: "The Silent Crisis: Rural Education Inequity Exposed", date: "June 25, 2026" }
+    { slug: "policy-hackathons", title: "แฮกกาธอนกำลังกลายเป็นการประท้วงรูปแบบใหม่ในการขับเคลื่อนนโยบายได้อย่างไร", date: "2 กรกฎาคม 2569" },
+    { slug: "trash-hunter", title: "เจาะลึกเบื้องหลังขบวนการ 'นักล่าขยะ' ที่ร่วมเปลี่ยนสวนลุมพินีให้สะอาดน่าอยู่", date: "28 มิถุนายน 2569" },
+    { slug: "education-inequity", title: "วิกฤตเงียบ: ปัญหาความเหลื่อมล้ำทางการศึกษาในพื้นที่ชนบทที่ยังรอการแก้ไข", date: "25 มิถุนายน 2569" }
   ];
 
   return (
-    <main className="flex flex-col min-h-screen bg-brand-beige pt-20">
+    <main className="flex flex-col min-h-screen bg-transparent text-brand-green pt-32 pb-24 font-[family-name:var(--font-kanit)]">
       
-      {/* Editorial Header */}
-      <section className="w-full bg-brand-beige py-12 px-6 border-b-2 border-brand-green">
-        <div className="max-w-7xl mx-auto flex items-end justify-between">
-          <h1 className="text-5xl md:text-7xl font-bold text-brand-green tracking-tight font-serif">HEq. Perspectives</h1>
-          <p className="hidden md:block text-foreground/60 font-medium uppercase tracking-widest text-sm">Latest News & Opinions</p>
+      {/* Editorial Hero Header matching Teams style */}
+      <section className="px-6 md:px-16 max-w-[1400px] mx-auto w-full mb-20">
+        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-medium tracking-tighter leading-none mb-12 uppercase">
+          PERSPECTIVES
+        </h1>
+        <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-24 border-t border-brand-green/20 pt-8">
+          <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl">
+            ข่าวสาร บทความวิเคราะห์ และเรื่องราวการรณรงค์เพื่อความเท่าเทียมและสิทธิมนุษยชนจากมุมมองของคนรุ่นใหม่ที่ขับเคลื่อนจริงในพื้นที่
+          </p>
+          <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl text-brand-green/70">
+            เราเชื่อว่าการแบ่งปันความรู้ ความเป็นจริง และการวิเคราะห์อย่างตรงไปตรงมา คือจุดเริ่มต้นสำคัญในการทลายกำแพงความเหลื่อมล้ำและสร้างทัศนคติใหม่
+          </p>
         </div>
       </section>
 
-      {/* Main CNN-Style Grid */}
-      <section className="w-full py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+      {/* Main Content Layout with thin borders */}
+      <section className="px-6 md:px-16 max-w-[1400px] mx-auto w-full">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 border-t border-brand-green/20 pt-16">
           
-          {/* Lead Story (65% width) */}
-          <Link href={`/blog/${leadStory.slug}`} className="lg:w-[65%] group cursor-pointer block">
-            <div className="w-full aspect-video bg-brand-gray relative overflow-hidden mb-6">
-              <img src={leadStory.image} alt="Lead" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            </div>
-            <div className="flex gap-4 items-center text-sm font-bold text-brand-orange uppercase tracking-wider mb-4">
-              <span>{leadStory.category}</span>
-              <span className="text-brand-gray">|</span>
-              <span className="text-foreground/50">{leadStory.date}</span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-brand-green leading-tight mb-6 group-hover:text-brand-emerald transition-colors">
-              {leadStory.title}
-            </h2>
-            <p className="text-xl text-foreground/80 leading-relaxed font-light">
-              {leadStory.summary}
-            </p>
-            <div className="mt-6 font-medium text-brand-green">By {leadStory.author}</div>
-          </Link>
+          {/* Left Column: Lead Story (65% width) */}
+          <div className="lg:w-[65%] flex flex-col gap-6">
+            <Link href={`/blog/${leadStory.slug}`} className="group cursor-pointer block">
+              <div className="w-full aspect-[16/9] bg-brand-gray/20 mb-8 overflow-hidden relative">
+                <img 
+                  src={leadStory.image} 
+                  alt={leadStory.title} 
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-[1.02]" 
+                />
+              </div>
+              <div className="flex gap-4 items-center text-sm font-medium uppercase tracking-wider mb-4 text-brand-green/60">
+                <span>{leadStory.category}</span>
+                <span>•</span>
+                <span>{leadStory.date}</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-6 leading-tight group-hover:underline transition-all">
+                {leadStory.title}
+              </h2>
+              <p className="text-lg md:text-xl font-light leading-relaxed text-brand-green/80 mb-6">
+                {leadStory.summary}
+              </p>
+              <div className="text-sm font-medium">โดย {leadStory.author}</div>
+            </Link>
+          </div>
 
-          {/* Sidebar Top Stories (35% width) */}
-          <div className="lg:w-[35%] flex flex-col gap-8 lg:border-l border-brand-gray/50 lg:pl-12">
-            <h3 className="text-2xl font-bold text-brand-green border-b-2 border-brand-emerald pb-4 uppercase tracking-wider">Top Stories</h3>
-            <div className="flex flex-col divide-y divide-brand-gray/50">
-              {topStories.map((story, i) => (
-                <Link href={`/blog/${story.slug}`} key={i} className="py-6 group block">
-                  <h4 className="text-2xl font-bold text-brand-green mb-3 leading-snug group-hover:text-brand-emerald transition-colors">
-                    {story.title}
-                  </h4>
-                  <p className="text-sm font-medium text-foreground/50 uppercase tracking-wider">{story.date}</p>
-                </Link>
-              ))}
+          {/* Right Column: Sidebar (35% width) with thin dividing borders */}
+          <div className="lg:w-[35%] flex flex-col gap-12 lg:border-l border-brand-green/20 lg:pl-16">
+            <div>
+              <h3 className="text-2xl font-medium tracking-tight uppercase mb-8 pb-4 border-b border-brand-green/20">
+                บทความยอดนิยม
+              </h3>
+              <div className="flex flex-col divide-y divide-brand-green/10">
+                {topStories.map((story, i) => (
+                  <Link href={`/blog/${story.slug}`} key={i} className="py-6 group block">
+                    <h4 className="text-xl font-medium leading-snug mb-3 group-hover:underline">
+                      {story.title}
+                    </h4>
+                    <p className="text-xs font-light text-brand-green/60 tracking-wider uppercase">
+                      {story.date}
+                    </p>
+                  </Link>
+                ))}
+              </div>
             </div>
-            
-            {/* Newsletter Callout in Sidebar */}
-            <div className="bg-brand-green text-white p-8 mt-4 rounded-3xl">
-              <h4 className="text-2xl font-bold mb-4">Stay Informed.</h4>
-              <p className="font-light text-white/80 mb-6">Get our best advocacy journalism delivered to your inbox.</p>
-              <input type="email" placeholder="Email address" className="w-full bg-white/10 border border-white/20 rounded-full px-5 py-3 mb-4 focus:outline-none focus:border-brand-emerald text-white" />
-              <button className="w-full bg-brand-emerald py-3 rounded-full font-semibold hover:bg-emerald-600 transition-colors">Subscribe</button>
+
+            {/* Newsletter form customized to match Team layout: thin borders, clean input */}
+            <div className="border border-brand-green/20 p-8 rounded-2xl bg-white/40 backdrop-blur-sm">
+              <h4 className="text-xl font-medium uppercase tracking-wider mb-4">ติดตามข่าวสาร</h4>
+              <p className="font-light text-sm text-brand-green/80 mb-6 leading-relaxed">
+                รับบทความวิเคราะห์เจาะลึกและรายงานความเคลื่อนไหวด้านสิทธิมนุษยชนจากเราส่งตรงถึงอีเมลของคุณ
+              </p>
+              <form className="flex flex-col gap-3">
+                <input 
+                  type="email" 
+                  placeholder="อีเมลของคุณ" 
+                  className="w-full bg-transparent border-b border-brand-green/45 py-3 text-sm focus:outline-none focus:border-brand-emerald text-brand-green placeholder:text-brand-green/40 transition-colors" 
+                  required
+                />
+                <button 
+                  type="submit" 
+                  className="w-full mt-4 py-3 rounded-full border border-brand-green text-brand-green hover:bg-brand-green hover:text-white font-medium text-sm tracking-wide uppercase transition-all duration-300"
+                >
+                  สมัครรับข่าวสาร
+                </button>
+              </form>
             </div>
           </div>
 
         </div>
       </section>
+      
     </main>
   );
 }

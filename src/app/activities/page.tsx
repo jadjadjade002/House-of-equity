@@ -2,44 +2,39 @@
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { mockActivities } from "@/lib/mockData";
+
+const FILTER_LABELS: Record<string, string> = {
+  "All": "ทั้งหมด",
+  "Upcoming": "กำลังจะมาถึง",
+  "Past": "ที่ผ่านมา",
+};
 
 export default function ActivitiesPage() {
   const [filter, setFilter] = useState("All");
-  const [activities, setActivities] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchActivities = async () => {
-      const { data, error } = await supabase
-        .from('activities')
-        .select('*, registrations(count)')
-        .order('created_at', { ascending: false });
-        
-      if (error) {
-        console.error("Error fetching activities:", error);
-      } else {
-        setActivities(data || []);
-      }
-      setLoading(false);
-    };
-    fetchActivities();
-  }, []);
+  const filtered = filter === "All"
+    ? mockActivities
+    : mockActivities.filter(a => a.status === filter);
 
-  const filteredActivities = filter === "All" 
-    ? activities 
-    : activities.filter(a => a.status === filter);
+  // Past events always at the bottom
+  const filteredActivities = [...filtered].sort((a, b) => {
+    if (a.status === "Past" && b.status !== "Past") return 1;
+    if (a.status !== "Past" && b.status === "Past") return -1;
+    return 0;
+  });
+
 
   return (
     <main className="flex flex-col min-h-screen bg-brand-beige pt-20">
       
       {/* Header */}
-      <section className="w-full bg-white py-20 px-6 border-b border-brand-gray/50">
+      <section className="w-full bg-transparent py-20 px-6 border-b border-brand-gray/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="max-w-2xl">
             <h1 className="text-5xl md:text-6xl font-bold text-brand-green mb-6 tracking-tight">Our Activities</h1>
             <p className="text-xl text-foreground font-light leading-relaxed">
-              Discover our workshops, hackathons, and exhibitions. Register to join the movement and make a real impact in your community.
+              ค้นพบเวิร์กชอป แฮกกาธอน และนิทรรศการของเรา ลงทะเบียนเพื่อเข้าร่วมและสร้างความเปลี่ยนแปลงในชุมชนของคุณ
             </p>
           </div>
 
@@ -55,7 +50,7 @@ export default function ActivitiesPage() {
                     : "text-foreground/60 hover:text-brand-green"
                 }`}
               >
-                {f}
+                {FILTER_LABELS[f]}
               </button>
             ))}
           </div>
@@ -65,15 +60,9 @@ export default function ActivitiesPage() {
       {/* Grid */}
       <section className="w-full py-20 px-6">
         <div className="max-w-7xl mx-auto min-h-[400px]">
-          {loading ? (
-            <div className="flex flex-col items-center justify-center h-64 gap-4 text-brand-green">
-              <Loader2 size={40} className="animate-spin" />
-              <p className="font-medium">Loading activities from Supabase...</p>
-            </div>
-          ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {filteredActivities.map((activity, index) => {
-                const registered = activity.registrations?.[0]?.count || 0;
+                const registered = activity.registrationsCount || 0;
                 const isFull = registered >= activity.capacity;
                 
                 return (
@@ -116,15 +105,15 @@ export default function ActivitiesPage() {
 
                       {activity.status === "Past" ? (
                         <button disabled className="w-full py-4 rounded-full bg-brand-gray text-foreground/50 font-medium cursor-not-allowed">
-                          Event Concluded
+                          กิจกรรมสิ้นสุดแล้ว
                         </button>
                       ) : isFull ? (
                         <button disabled className="w-full py-4 rounded-full bg-red-50 text-red-500 font-medium border-2 border-red-100 cursor-not-allowed">
-                          Workshop Full
+                          เต็มแล้ว
                         </button>
                       ) : (
                         <button className="w-full py-4 rounded-full border-2 border-brand-emerald text-brand-green font-medium group-hover:bg-brand-emerald group-hover:text-white transition-all duration-300">
-                          Register Now
+                          ลงทะเบียนเลย
                         </button>
                       )}
                     </div>
@@ -132,7 +121,6 @@ export default function ActivitiesPage() {
                 )
               })}
             </div>
-          )}
         </div>
       </section>
 

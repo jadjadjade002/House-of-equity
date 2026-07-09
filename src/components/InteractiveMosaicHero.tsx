@@ -41,7 +41,7 @@ const RAW_IMAGES = [
 function getShuffledGrid() {
   const expanded = [];
   // 25 columns * 12 rows = 300 items
-  for (let i = 0; i < 300; i++) {
+  for (let i = 0; i < 800; i++) {
     expanded.push(RAW_IMAGES[i % RAW_IMAGES.length]);
   }
 
@@ -53,12 +53,12 @@ function getShuffledGrid() {
 
   // Assign Sliding (Accordion) parameters
   return expanded.map((src, idx) => {
-    const col = idx % 25;
-    const row = Math.floor(idx / 25);
+    const col = idx % 32;
+    const row = Math.floor(idx / 32);
 
-    // Grid center is approx col 12, row 5
-    const distX = col - 12;
-    const distY = row - 5;
+    // Grid center is approx col 16, row 12
+    const distX = col - 16;
+    const distY = row - 12;
 
     // Push them outwards based on distance. 
     const scatterMultiplierX = 150 + Math.random() * 50;
@@ -82,14 +82,14 @@ function getShuffledGrid() {
 }
 
 function GridItem({ src, initialX, initialY, finishThreshold, progress }: { src: string, initialX: number, initialY: number, finishThreshold: number, progress: MotionValue<number> }) {
-  // Slide from the scattered position down to 0 (its true grid position)
-  const x = useTransform(progress, [0, finishThreshold], [initialX, 0]);
-  const y = useTransform(progress, [0, finishThreshold], [initialY, 0]);
+  // Tiles are placed directly in the grid (no initial scatter)
+  const x = useTransform(progress, [0, 1], [0, 0]);
+  const y = useTransform(progress, [0, 1], [0, 0]);
 
   return (
     <motion.div
       style={{ x, y }}
-      className="relative w-full aspect-square overflow-hidden cursor-pointer shadow-sm z-0 hover:z-20 transition-transform duration-300 hover:scale-[1.15] bg-brand-gray/20"
+      className="group relative w-full aspect-square overflow-hidden cursor-pointer bg-brand-gray/20"
     >
       <img
         src={src}
@@ -119,8 +119,8 @@ export default function InteractiveMosaicHero() {
     offset: ["start start", "end end"],
   });
 
-  // Start zoomed in (scale 3.5), and as you scroll down, it zooms OUT to scale 1.
-  const scale = useTransform(scrollYProgress, [0, 0.75], [3.5, 1]);
+  // Start zoomed in (scale 3.0), and as you scroll down, it zooms OUT to scale 0.38.
+  const scale = useTransform(scrollYProgress, [0, 1], [1.0, 0.38]);
 
   // Hydration fix
   const [isMounted, setIsMounted] = useState(false);
@@ -132,7 +132,7 @@ export default function InteractiveMosaicHero() {
   }, [isMounted]);
 
   if (!isMounted) {
-    return <div className="h-[600vh] relative bg-white"><div className="sticky top-0 h-screen w-full bg-brand-beige" /></div>;
+    return <div ref={containerRef} className="h-[600vh] relative bg-white"><div className="sticky top-0 h-screen w-full bg-brand-beige" /></div>;
   }
 
   return (
@@ -141,22 +141,22 @@ export default function InteractiveMosaicHero() {
 
         {/* Central Logo / Text */}
         <motion.div
-          className="absolute z-10 flex flex-col items-center text-center pointer-events-none drop-shadow-xl"
+          className="absolute z-10 flex flex-col items-center text-center pointer-events-none drop-shadow-2xl"
         >
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-2 tracking-wide">Better Living.</h1>
-          <p className="text-2xl md:text-3xl text-white/90 font-medium tracking-widest uppercase">Together, we build equality.</p>
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-2 tracking-wide drop-shadow-[0_6px_15px_rgba(0,0,0,0.85)]">Better Living.</h1>
+          <p className="text-2xl md:text-3xl text-white/90 font-medium tracking-widest uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.85)]">Together, we build equality.</p>
         </motion.div>
 
         {/* The Mosaic Grid */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center grid gap-0.5 md:gap-[2px] p-1"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center grid gap-0 p-0"
           style={{
             scale,
-            // Responsive column count: 7 cols on mobile, 25 on larger screens
-            gridTemplateColumns: isMobile ? 'repeat(7, minmax(0, 1fr))' : 'repeat(25, minmax(0, 1fr))',
+            // Responsive column count: 12 cols on mobile, 32 on larger screens
+            gridTemplateColumns: isMobile ? 'repeat(12, minmax(0, 1fr))' : 'repeat(32, minmax(0, 1fr))',
             // Adjust container size for mobile to avoid huge overflow
-            width: isMobile ? '500vw' : '300vw',
-            height: isMobile ? '500vh' : '300vh'
+            width: isMobile ? '700vw' : '600vw',
+            height: isMobile ? '700vh' : '600vh'
           }}
         >
           {gridData.map((item, idx) => {

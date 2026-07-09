@@ -1,96 +1,159 @@
-import { Users, BookOpen, Leaf } from "lucide-react";
+"use client";
+import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function TeamsPage() {
-  const teams = [
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      // Calculate max scroll width: total scrollable width - visible width
+      setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
+    }
+  }, []);
+
+  const teamMembers = [
     {
-      id: "gender",
-      title: "Gender Team",
-      icon: Users,
-      color: "bg-pink-100 text-pink-700",
-      accent: "bg-pink-500",
-      description: "Advocating for gender equality, LGBTQIA+ rights, and breaking down social expectations.",
-      projects: ["Sexpectation The Exhibition", "Safe Space Workshops"],
-      members: ["Ploy (Lead)", "Karn", "Nicha"]
+      id: 1,
+      name: "Ploy",
+      role: "Lead Coordinator",
+      motto: "\"Equality is not a privilege, it's a fundamental right.\"",
+      image: "/images/Screenshot 2026-07-04 225018.png"
     },
     {
-      id: "education",
-      title: "Education Team",
-      icon: BookOpen,
-      color: "bg-blue-100 text-blue-700",
-      accent: "bg-blue-500",
-      description: "Ensuring educational equity, scholarship access, and empowering youth development.",
-      projects: ["Youth Advocacy Equithon", "Mentorship Program"],
-      members: ["Win (Lead)", "Fah", "Ohm"]
+      id: 2,
+      name: "Karn",
+      role: "Campaign Strategist",
+      motto: "\"True impact begins when we listen to marginalized voices.\"",
+      image: "/images/Screenshot 2026-07-04 225023.png"
     },
     {
-      id: "environment",
-      title: "Environment Team",
-      icon: Leaf,
-      color: "bg-green-100 text-green-700",
-      accent: "bg-brand-emerald",
-      description: "Promoting sustainability, circular economy, and community waste management.",
-      projects: ["Thoughtful Trash Project", "The Urgent Call Research"],
-      members: ["Earth (Lead)", "Mint", "Pond"]
+      id: 3,
+      name: "Nicha",
+      role: "Community Manager",
+      motto: "\"Empowering youth is the key to sustainable change.\"",
+      image: "/images/Screenshot 2026-07-04 225041.png"
+    },
+    {
+      id: 4,
+      name: "Win",
+      role: "Education Advocate",
+      motto: "\"Education is the most powerful weapon to change the world.\"",
+      image: "/images/Screenshot 2026-07-04 225104.png"
+    },
+    {
+      id: 5,
+      name: "Fah",
+      role: "Sustainability Lead",
+      motto: "\"A green future starts with mindful actions today.\"",
+      image: "/images/Screenshot 2026-07-04 225115.png"
     }
   ];
 
   return (
-    <main className="flex flex-col min-h-screen bg-white pt-20">
+    <main className="flex flex-col min-h-screen bg-brand-beige text-brand-green pt-32 pb-24 font-[family-name:var(--font-kanit)]">
       
-      {/* Hero */}
-      <section className="w-full bg-brand-green text-white py-24 px-6 border-b border-brand-gray/20">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Our Core Teams</h1>
-          <p className="text-xl md:text-2xl font-light text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Meet the passionate youth leaders driving our three pillars of equality across Thailand.
+      {/* Hero Section */}
+      <section className="px-6 md:px-16 max-w-[1400px] mx-auto w-full mb-20">
+        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-medium tracking-tighter leading-none mb-12">
+          MEET OUR TEAM
+        </h1>
+        <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-24 border-t border-brand-green/20 pt-8">
+          <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl">
+            At House of Equity, passion, dedication, and youth leadership shape every initiative. Guided by a shared vision for a fairer society, we create impactful programs that elevate everyday lives with purpose and compassion.
+          </p>
+          <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl">
+            Advocacy is a way of life where purpose, feeling, and determination come together to shape meaningful environments. We are the driving force behind the change we wish to see.
           </p>
         </div>
       </section>
 
-      {/* Teams Grid */}
-      <section className="w-full py-24 px-6 bg-brand-beige">
-        <div className="max-w-6xl mx-auto flex flex-col gap-24">
-          {teams.map((team) => (
-            <div key={team.id} id={team.id} className="flex flex-col lg:flex-row gap-12 lg:items-center bg-white p-10 md:p-16 rounded-[3rem] shadow-sm border border-brand-gray relative overflow-hidden">
-              <div className={`absolute top-0 left-0 w-2 h-full ${team.accent}`} />
+      {/* Group Photo */}
+      <section className="w-full h-[60vh] md:h-[80vh] relative mb-24">
+        <img 
+          src="/images/Screenshot 2026-07-04 225200.png" 
+          alt="House of Equity Team"
+          className="w-full h-full object-cover object-center"
+        />
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="px-6 md:px-16 max-w-[1400px] mx-auto w-full mb-40">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
+          <div className="lg:w-1/3">
+            <h2 className="text-4xl md:text-5xl font-medium italic tracking-tight uppercase">Inside House of Equity</h2>
+          </div>
+          <div className="lg:w-2/3 flex flex-col gap-12">
+            <p className="text-2xl md:text-3xl font-light leading-snug mb-8">
+              Discover a new way of driving impact with our youth-led initiatives. Rooted in inclusivity, our work combines timeless advocacy, modern strategies, and mindful innovation, shaping spaces that feel safe and empowering.
+            </p>
+            
+            <div className="flex flex-col gap-8 border-t border-brand-green/20 pt-8">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div className="md:w-1/4 flex gap-4 text-xl font-medium">
+                  <span className="text-brand-green/40">01</span>
+                  Our Vision
+                </div>
+                <div className="md:w-3/4 text-lg font-light leading-relaxed">
+                  We see equality as more than a goal—it's a way of living with intention, empathy, and connection. We bring this vision to life through timeless, refined initiatives that blend advocacy with community engagement to elevate everyday spaces.
+                </div>
+              </div>
               
-              <div className="flex-1">
-                <div className={`w-20 h-20 rounded-2xl ${team.color} flex items-center justify-center mb-8`}>
-                  <team.icon size={40} />
+              <div className="flex flex-col md:flex-row gap-6 md:gap-16 border-t border-brand-green/10 pt-8">
+                <div className="md:w-1/4 flex gap-4 text-xl font-medium">
+                  <span className="text-brand-green/40">02</span>
+                  Our Mission
                 </div>
-                <h2 className="text-4xl font-bold text-brand-green mb-6">{team.title}</h2>
-                <p className="text-xl text-foreground/80 leading-relaxed font-light mb-10">
-                  {team.description}
-                </p>
-                <div className="flex flex-col gap-6">
-                  <div>
-                    <h4 className="font-semibold text-brand-green mb-3 uppercase tracking-wider text-sm">Key Projects</h4>
-                    <ul className="flex flex-wrap gap-2">
-                      {team.projects.map((p, i) => (
-                        <li key={i} className="bg-brand-gray/50 px-4 py-2 rounded-full text-sm text-foreground/80 font-medium">{p}</li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="md:w-3/4 text-lg font-light leading-relaxed">
+                  We are dedicated to crafting a society that blends systemic reform with human-centered advocacy. Through innovation, education, and thoughtful action, we shape environments that are safe, inclusive, and designed to connect people across all backgrounds.
                 </div>
               </div>
-
-              <div className="lg:w-1/3 bg-brand-beige/50 p-8 rounded-3xl border border-brand-gray/50">
-                <h4 className="font-semibold text-brand-green mb-6 text-xl">Core Members</h4>
-                <ul className="flex flex-col gap-4">
-                  {team.members.map((m, i) => (
-                    <li key={i} className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-brand-gray animate-pulse" />
-                      <span className="font-medium text-foreground/80">{m}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full mt-8 py-3 rounded-full border-2 border-brand-emerald text-brand-emerald font-medium hover:bg-brand-emerald hover:text-white transition-colors">
-                  Join this Team
-                </button>
-              </div>
-
             </div>
-          ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Members Horizontal Scroll */}
+      <section className="w-full overflow-hidden mb-24">
+        <div className="px-6 md:px-16 max-w-[1400px] mx-auto w-full mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight uppercase max-w-xl leading-none">
+            THE YOUTH <span className="italic font-light">BEHIND THE VISION</span>
+          </h2>
+          <p className="text-lg md:text-xl font-light leading-relaxed max-w-md">
+            Each member of our team brings a unique perspective, bound by a shared passion for thoughtful advocacy and timeless equality.
+          </p>
+        </div>
+
+        {/* Scrolling Container with Framer Motion */}
+        <div className="w-full px-6 md:px-16 pb-12 cursor-grab active:cursor-grabbing">
+          <motion.div ref={carouselRef} className="overflow-hidden">
+            <motion.div 
+              drag="x" 
+              dragConstraints={{ right: 0, left: -width }} 
+              whileTap={{ cursor: "grabbing" }}
+              className="flex gap-8 w-max"
+            >
+              {teamMembers.map((member) => (
+                <motion.div key={member.id} className="w-[300px] md:w-[400px] flex flex-col group min-w-[300px] md:min-w-[400px]">
+                  <div className="w-full aspect-[4/5] bg-brand-gray/20 mb-6 overflow-hidden relative pointer-events-none">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex justify-between items-end border-b border-brand-green/20 pb-4 mb-4">
+                    <h3 className="text-2xl font-medium">{member.name}</h3>
+                    <span className="text-sm font-light text-brand-green/60 uppercase tracking-wider text-right max-w-[50%]">{member.role}</span>
+                  </div>
+                  <p className="text-base font-light italic text-brand-green/80">
+                    {member.motto}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
