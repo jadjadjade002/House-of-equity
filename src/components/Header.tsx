@@ -104,7 +104,7 @@ export default function Header() {
                 Donate
               </Link>
               <Link
-                href="/contact"
+                href="/volunteer"
                 onClick={closeMenu}
                 className="flex-1 text-center border-2 border-brand-emerald text-brand-green py-3 rounded-full font-semibold text-sm hover:bg-brand-emerald hover:text-white transition-all"
               >
